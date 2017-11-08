@@ -5,6 +5,8 @@ import com.babychev.sqlcmd.model.DatabaseManager;
 import com.babychev.sqlcmd.view.TableViewUtil;
 import com.babychev.sqlcmd.view.View;
 
+import java.util.Set;
+
 public class Find implements Command{
 
     private DatabaseManager manager;
@@ -25,7 +27,7 @@ public class Find implements Command{
     @Override
     public void execute() {
         try {
-            DataSet[] data = null;
+            Set<DataSet> data = null;
             String table = null;
             String [] params = parameters.split("\\|");
             if (params.length == 2) {

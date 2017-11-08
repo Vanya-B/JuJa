@@ -6,6 +6,9 @@ import com.babychev.sqlcmd.view.View;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -49,7 +52,9 @@ public class FindTest {
         user2.put("id", "2");
         user2.put("login", "Sara");
         user2.put("password", "****");
-        DataSet[] data = new DataSet[] {user1, user2};
+        Set<DataSet> data = new LinkedHashSet<>();
+        data.add(user1);
+        data.add(user2);
 
         when(manager.getTableData("users")).thenReturn(data);
         //when
@@ -75,7 +80,8 @@ public class FindTest {
         user1.put("id", null);
         user1.put("login", null);
         user1.put("password", null);
-        DataSet[] data = new DataSet[] {user1};
+        Set<DataSet> data = new LinkedHashSet<>();
+        data.add(user1);
 
         when(manager.getTableData("users")).thenReturn(data);
         //when

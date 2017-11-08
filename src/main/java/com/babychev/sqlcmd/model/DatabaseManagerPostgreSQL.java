@@ -78,29 +78,27 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
 
 
     @Override
-    public DataSet [] getTableData(String tableName) {
+    public Set<DataSet> getTableData(String tableName) {
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery("SELECT * FROM " + schema + "." + tableName))
         {
-            int size = getSize(schema, tableName);
-            DataSet[] result = new DataSet[size];
+            Set<DataSet> result = new LinkedHashSet<>();
             ResultSetMetaData rsmd = rs.getMetaData();
-            int index = 0;
             while (rs.next()) {
                 DataSet dataSet = new DataSet();
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                     dataSet.put(rsmd.getColumnName(i).trim(), rs.getString(i).trim());
                 }
-                result[index++] = dataSet;
+                result.add(dataSet);
             }
 
-            if (result.length == 0) {
-                DataSet[] columns = new DataSet[1];
+            if (result.size() == 0) {
+                Set<DataSet> columns = new LinkedHashSet<>();
                 DataSet dataSet = new DataSet();
                 for (int i = 1; i < rsmd.getColumnCount() + 1; i++) {
                     dataSet.put(rsmd.getColumnName(i).trim(), null);
                 }
-                columns[0] = dataSet;
+                columns.add(dataSet);
                 return columns;
             }
             return result;
@@ -110,7 +108,7 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
     }
 
     @Override
-    public DataSet [] getTableDataLimit(String tableName, int limit, int offSet) {
+    public Set<DataSet> getTableDataLimit(String tableName, int limit, int offSet) {
         String sql = "SELECT * FROM " + schema + "." + tableName + " LIMIT " + limit  + " OFFSET " + offSet;
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(sql))
@@ -118,18 +116,15 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
             if (offSet > getSize(schema ,tableName)) {
                 throw new IllegalArgumentException("OFFSET cannot be bigger than size of table");
             }
-            DataSet[] tmp = new DataSet[limit];
+            Set<DataSet> result = new LinkedHashSet<>();
             ResultSetMetaData rsmd = rs.getMetaData();
-            int index = 0;
             while (rs.next()) {
                 DataSet dataSet = new DataSet();
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                     dataSet.put(rsmd.getColumnName(i).trim(), rs.getString(i).trim());
                 }
-                tmp[index++] = dataSet;
+                result.add(dataSet);
             }
-            DataSet[] result = new DataSet[index];
-            System.arraycopy(tmp, 0, result, 0 ,index);
             return result;
         } catch (SQLException e) {
             e.printStackTrace();

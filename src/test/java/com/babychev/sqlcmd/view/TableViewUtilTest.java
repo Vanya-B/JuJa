@@ -3,23 +3,27 @@ package com.babychev.sqlcmd.view;
 import com.babychev.sqlcmd.model.DataSet;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 
 public class TableViewUtilTest {
 
-    private static DataSet [] datas;
-    private static DataSet [] nullColumnData;
-    private static DataSet [] nullColumnDatas;
-    private static DataSet [] emptyData;
-    private static DataSet [] nullData;
-    private static DataSet [] dataClear;
+    private static Set<DataSet> datas;
+    private static Set<DataSet> nullColumnData;
+    private static Set<DataSet> nullColumnDatas;
+    private static Set<DataSet> emptyData;
+    private static Set<DataSet> nullData;
+    private static Set<DataSet> dataClear;
     private static final int SIZE_FOR_DATAS = 2;
     private static final int SIZE_FOR_EMPTY_DATAS = 1;
     private static final int SIZE_FOR_DATAS_WITH_NULL_COLUMNS = 3;
 
     @BeforeClass
     public static void setup () {
-        datas = new DataSet[SIZE_FOR_DATAS];
+        datas = new LinkedHashSet<>();
         DataSet row1 = new DataSet();
         row1.put("id", "1");
         row1.put("column", "somelongvue");
@@ -28,38 +32,38 @@ public class TableViewUtilTest {
         row2.put("id", "256");
         row2.put("column", "som");
         row2.put("ups", "somelongvalue");
-        datas[0] = row1;
-        datas[1] = row2;
+        datas.add(row1);
+        datas.add(row2);;
 
-        dataClear = new DataSet[SIZE_FOR_EMPTY_DATAS];
+        dataClear = new LinkedHashSet<>();
         DataSet rowc = new DataSet();
         rowc.put("id", null);
         rowc.put("column", null);
         rowc.put("ups", null);
-        dataClear[0] = rowc;
+        dataClear.add(rowc);
 
-        emptyData = new DataSet[SIZE_FOR_EMPTY_DATAS];
+        emptyData = new LinkedHashSet<>();
         DataSet emptyRow = new DataSet();
         emptyRow.put("id", "");
         emptyRow.put("column", "");
         emptyRow.put("ups", "");
-        emptyData[0] = emptyRow;
+        emptyData.add(emptyRow);
 
-        nullData = new DataSet[SIZE_FOR_EMPTY_DATAS];
+        nullData = new LinkedHashSet<>();
         DataSet nullValueRow = new DataSet();
         nullValueRow.put("id", "1");
         nullValueRow.put("column", null);
         nullValueRow.put("ups", "some");
-        nullData[0] = nullValueRow;
+        nullData.add(nullValueRow);
 
-        nullColumnData = new DataSet[SIZE_FOR_EMPTY_DATAS];
+        nullColumnData = new LinkedHashSet<>();
         DataSet nullColumnRow = new DataSet();
         nullColumnRow.put("id", "1");
         nullColumnRow.put("column", "columnwithsomevalue");
         nullColumnRow.put(null, "some");
-        nullColumnData[0] = nullColumnRow;
+        nullColumnData.add(nullColumnRow);
 
-        nullColumnDatas = new DataSet[SIZE_FOR_DATAS_WITH_NULL_COLUMNS];
+        nullColumnDatas = new LinkedHashSet<>();
         DataSet nullColumnsRow1 = new DataSet();
         DataSet nullColumnsRow2 = new DataSet();
         DataSet nullColumnsRow3 = new DataSet();
@@ -72,9 +76,9 @@ public class TableViewUtilTest {
         nullColumnsRow3.put("id", "3");
         nullColumnsRow3.put("column", "columnwithsomevalue");
         nullColumnsRow3.put("ups", "other");
-        nullColumnDatas[0] = nullColumnsRow1;
-        nullColumnDatas[1] = nullColumnsRow2;
-        nullColumnDatas[2] = nullColumnsRow3;
+        nullColumnDatas.add(nullColumnsRow1);
+        nullColumnDatas.add(nullColumnsRow2);
+        nullColumnDatas.add(nullColumnsRow3);
     }
 
     @Test

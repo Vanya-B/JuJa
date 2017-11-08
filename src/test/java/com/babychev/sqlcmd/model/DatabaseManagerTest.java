@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 
 public class DatabaseManagerTest {
@@ -116,8 +118,8 @@ public class DatabaseManagerTest {
                 "column : password\n" +
                 "value : qwerty\n" +
                 "]";
-        DataSet[] actual = manager.getTableData(tableName);
-        assertEquals(expected, Arrays.toString(actual));
+        Set<DataSet> actual = manager.getTableData(tableName);
+        assertEquals(expected, actual.toString());
     }
 
     @Test
@@ -139,8 +141,8 @@ public class DatabaseManagerTest {
         data.put("login", "insert");
         data.put("password", "insert");
         manager.insert(tableName, data);
-        DataSet[] actual = manager.getTableData(tableName);
-        assertEquals(expected, Arrays.toString(actual));
+        Set<DataSet> actual = manager.getTableData(tableName);
+        assertEquals(expected, actual.toString());
     }
 
     @Test
@@ -156,8 +158,8 @@ public class DatabaseManagerTest {
         data.put("login", "insert");
         data.put("password", "insert");
         manager.insert(tableName, data);
-        DataSet[] actual = manager.getTableDataLimit(tableName, 1,0);
-        assertEquals(expected, Arrays.toString(actual));
+        Set<DataSet> actual = manager.getTableDataLimit(tableName, 1,0);
+        assertEquals(expected, actual.toString());
     }
 
     @Test
@@ -173,8 +175,8 @@ public class DatabaseManagerTest {
         newData.put("login", "John");
         newData.put("password", "12345");
         manager.update(tableName, 1, newData);
-        DataSet[] actual = manager.getTableData(tableName);
-        assertEquals(expected, Arrays.toString(actual));
+        Set<DataSet> actual = manager.getTableData(tableName);
+        assertEquals(expected, actual.toString());
     }
 
     @Test
@@ -187,8 +189,8 @@ public class DatabaseManagerTest {
                           "value : null\n" +
                           "]";
         manager.clear(tableName);
-        DataSet[] actual = manager.getTableData(tableName);
-        assertEquals(expected, Arrays.toString(actual));
+        Set<DataSet> actual = manager.getTableData(tableName);
+        assertEquals(expected, actual.toString());
     }
 
     @Test

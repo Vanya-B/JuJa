@@ -13,9 +13,9 @@ public interface DatabaseManager {
 
     Set<String> getListTables();
 
-    DataSet [] getTableData(String tableName);
+    Set<DataSet> getTableData(String tableName);
 
-    DataSet [] getTableDataLimit(String tableName, int limit, int offSet);
+    Set<DataSet> getTableDataLimit(String tableName, int limit, int offSet);
 
     int update(String tableName, int id, DataSet data);
 

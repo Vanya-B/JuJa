@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -45,8 +48,8 @@ public class UpdateTest {
         DataSet data = new DataSet();
         data.put("id", "1");
         data.put("column1", "value1");
-        DataSet [] datas = new DataSet[1];
-        datas[0] = data;
+        Set<DataSet> datas = new LinkedHashSet<>();
+        datas.add(data);
         when(manager.update(Mockito.anyString(), Mockito.anyInt(), Mockito.any(DataSet.class))).thenReturn(1);
         when(manager.getTableData("tableName")).thenReturn(datas);
         //when
