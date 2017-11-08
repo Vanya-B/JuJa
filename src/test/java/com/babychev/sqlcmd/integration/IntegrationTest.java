@@ -235,9 +235,9 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "[template1, template0, postgres, test_db]\n" +
+                "[template1, template0, postgres]\n" +
                 "congratulation, database testdb is created \n" +
-                "[template1, template0, postgres, test_db, testdb]\n" +
+                "[template1, template0, postgres, testdb]\n" +
                 "congratulation, database testdb is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
@@ -257,7 +257,7 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "[template1, template0, postgres, test_db]\n" +
+                "[template1, template0, postgres]\n" +
                 "wrong number of parameters, expected 2 but have : 3\n" +
                 "============= Good Bay =============\n", out.getData());
     }
@@ -1230,9 +1230,9 @@ public class IntegrationTest {
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
                 "congratulation, database testdb is created \n" +
-                "[template1, template0, postgres, test_db, testdb]\n" +
+                "[template1, template0, postgres, testdb]\n" +
                 "congratulation, database testdb is deleted \n" +
-                "[template1, template0, postgres, test_db]\n" +
+                "[template1, template0, postgres]\n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
