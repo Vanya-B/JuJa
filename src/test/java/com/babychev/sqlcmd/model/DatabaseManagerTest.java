@@ -102,7 +102,7 @@ public class DatabaseManagerTest {
     @Test
     public void testGetListTables(){
         String expected = "[" + tableName + "]";
-        String actual = Arrays.toString(manager.getListTables());
+        String actual = manager.getListTables().toString();
         assertEquals(expected, actual);
     }
 

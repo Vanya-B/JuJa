@@ -29,7 +29,7 @@ public class Drop implements Command{
                 throw new IllegalArgumentException("wrong number of parameters, have to 2, but entered : " + params.length);
             }
             manager.drop(params[1]);
-            console.print("dropped success! list of tables : " + Arrays.toString(manager.getListTables()) + "\n");
+            console.print("dropped success! list of tables : " + manager.getListTables() + "\n");
         } catch (Exception e) {
             console.print(e.getMessage() + "\n");
         }

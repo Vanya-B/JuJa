@@ -4,6 +4,10 @@ import com.babychev.sqlcmd.model.DatabaseManager;
 import com.babychev.sqlcmd.view.View;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -39,7 +43,7 @@ public class DropTest {
     @Test
     public void testDropTable () {
         //given
-        String [] tables = new String[0];
+        Set<String> tables = new LinkedHashSet<>();
         when(manager.getListTables()).thenReturn(tables);
         //when
         drop.canProcess("drop|tableName");

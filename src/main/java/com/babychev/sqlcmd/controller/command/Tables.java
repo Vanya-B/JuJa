@@ -3,8 +3,6 @@ package com.babychev.sqlcmd.controller.command;
 import com.babychev.sqlcmd.model.DatabaseManager;
 import com.babychev.sqlcmd.view.View;
 
-import java.util.Arrays;
-
 public class Tables implements Command{
 
     private DatabaseManager manager;
@@ -22,6 +20,6 @@ public class Tables implements Command{
 
     @Override
     public void execute() {
-        console.print(Arrays.toString(manager.getListTables()) + "\n");
+        console.print(manager.getListTables() + "\n");
     }
 }

@@ -1,6 +1,7 @@
 package com.babychev.sqlcmd.model;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 public interface DatabaseManager {
 
@@ -10,7 +11,7 @@ public interface DatabaseManager {
 
     boolean closeConnection();
 
-    String [] getListTables();
+    Set<String> getListTables();
 
     DataSet [] getTableData(String tableName);
 

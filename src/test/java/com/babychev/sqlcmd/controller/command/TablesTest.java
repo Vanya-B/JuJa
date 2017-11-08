@@ -4,6 +4,11 @@ import com.babychev.sqlcmd.model.DatabaseManager;
 import com.babychev.sqlcmd.view.View;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -39,7 +44,7 @@ public class TablesTest {
     @Test
     public void testTables () {
         //given
-        String [] listTables = new String[] {"table1", "table2"};
+        Set<String> listTables = new LinkedHashSet<>(Arrays.asList("table1", "table2"));
         when(manager.getListTables()).thenReturn(listTables);
         //when
         tables.execute();
@@ -52,6 +57,6 @@ public class TablesTest {
         //when
         tables.execute();
         //then
-        verify(console).print("null\n");
+        verify(console).print("[]\n");
     }
 }

@@ -3,6 +3,8 @@ package com.babychev.sqlcmd.model;
 import com.babychev.sqlcmd.controller.connection.*;
 import java.sql.*;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class DatabaseManagerPostgreSQL implements DatabaseManager {
 
@@ -59,18 +61,15 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
     }
 
     @Override
-    public String [] getListTables(){
-        String [] result = new String[100]; //TODO size of array
+    public Set<String> getListTables(){
+        Set<String> result = new LinkedHashSet<>();
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery("SELECT table_name FROM information_schema.tables where table_schema = '" + schema + "'"))
         {
-            int capacity = 0;
+            int index = 1;
             while (rs.next()) {
-                int index = 0;
-                result[capacity] = rs.getString(++index);
-                capacity++;
+                result.add(rs.getString(index++));
             }
-            result = Arrays.copyOf(result, capacity);
         } catch (SQLException e) {
             e.printStackTrace();
         }
