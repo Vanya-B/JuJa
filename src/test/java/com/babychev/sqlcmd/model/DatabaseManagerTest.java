@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -118,7 +119,7 @@ public class DatabaseManagerTest {
                 "column : password\n" +
                 "value : qwerty\n" +
                 "]";
-        Set<DataSet> actual = manager.getTableData(tableName);
+        List<DataSet> actual = manager.getTableData(tableName);
         assertEquals(expected, actual.toString());
     }
 
@@ -141,7 +142,7 @@ public class DatabaseManagerTest {
         data.put("login", "insert");
         data.put("password", "insert");
         manager.insert(tableName, data);
-        Set<DataSet> actual = manager.getTableData(tableName);
+        List<DataSet> actual = manager.getTableData(tableName);
         assertEquals(expected, actual.toString());
     }
 
@@ -158,7 +159,7 @@ public class DatabaseManagerTest {
         data.put("login", "insert");
         data.put("password", "insert");
         manager.insert(tableName, data);
-        Set<DataSet> actual = manager.getTableDataLimit(tableName, 1,0);
+        List<DataSet> actual = manager.getTableDataLimit(tableName, 1,0);
         assertEquals(expected, actual.toString());
     }
 
@@ -175,7 +176,7 @@ public class DatabaseManagerTest {
         newData.put("login", "John");
         newData.put("password", "12345");
         manager.update(tableName, 1, newData);
-        Set<DataSet> actual = manager.getTableData(tableName);
+        List<DataSet> actual = manager.getTableData(tableName);
         assertEquals(expected, actual.toString());
     }
 
@@ -189,7 +190,7 @@ public class DatabaseManagerTest {
                           "value : null\n" +
                           "]";
         manager.clear(tableName);
-        Set<DataSet> actual = manager.getTableData(tableName);
+        List<DataSet> actual = manager.getTableData(tableName);
         assertEquals(expected, actual.toString());
     }
 

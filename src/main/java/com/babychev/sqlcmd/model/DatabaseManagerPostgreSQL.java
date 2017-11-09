@@ -2,9 +2,7 @@ package com.babychev.sqlcmd.model;
 
 import com.babychev.sqlcmd.controller.connection.*;
 import java.sql.*;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 public class DatabaseManagerPostgreSQL implements DatabaseManager {
 
@@ -78,11 +76,11 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
 
 
     @Override
-    public Set<DataSet> getTableData(String tableName) {
+    public List<DataSet> getTableData(String tableName) {
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery("SELECT * FROM " + schema + "." + tableName))
         {
-            Set<DataSet> result = new LinkedHashSet<>();
+            List<DataSet> result = new LinkedList<>();
             ResultSetMetaData rsmd = rs.getMetaData();
             while (rs.next()) {
                 DataSet dataSet = new DataSet();
@@ -93,7 +91,7 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
             }
 
             if (result.size() == 0) {
-                Set<DataSet> columns = new LinkedHashSet<>();
+                List<DataSet> columns = new LinkedList<>();
                 DataSet dataSet = new DataSet();
                 for (int i = 1; i < rsmd.getColumnCount() + 1; i++) {
                     dataSet.put(rsmd.getColumnName(i).trim(), null);
@@ -108,7 +106,7 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
     }
 
     @Override
-    public Set<DataSet> getTableDataLimit(String tableName, int limit, int offSet) {
+    public List<DataSet> getTableDataLimit(String tableName, int limit, int offSet) {
         String sql = "SELECT * FROM " + schema + "." + tableName + " LIMIT " + limit  + " OFFSET " + offSet;
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(sql))
@@ -116,7 +114,7 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
             if (offSet > getSize(schema ,tableName)) {
                 throw new IllegalArgumentException("OFFSET cannot be bigger than size of table");
             }
-            Set<DataSet> result = new LinkedHashSet<>();
+            List<DataSet> result = new LinkedList<>();
             ResultSetMetaData rsmd = rs.getMetaData();
             while (rs.next()) {
                 DataSet dataSet = new DataSet();
@@ -192,23 +190,6 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
         String sql = "TRUNCATE TABLE " + schema + "." + tableName;
         try(Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public String [] getColumns(String tableName) {
-        try (Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery("SELECT * FROM " + schema + "." + tableName))
-        {
-            ResultSetMetaData rsmd = rs.getMetaData();
-            String [] result = new String[rsmd.getColumnCount()];
-            int index = 1;
-            for (int i = 0; i < rsmd.getColumnCount() ; i++) {
-                result[i] = rsmd.getColumnName(index++);
-            }
-            return result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

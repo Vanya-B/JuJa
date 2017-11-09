@@ -5,25 +5,27 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
 
 public class TableViewUtilTest {
 
-    private static Set<DataSet> datas;
-    private static Set<DataSet> nullColumnData;
-    private static Set<DataSet> nullColumnDatas;
-    private static Set<DataSet> emptyData;
-    private static Set<DataSet> nullData;
-    private static Set<DataSet> dataClear;
+    private static List<DataSet> datas;
+    private static List<DataSet> nullColumnData;
+    private static List<DataSet> nullColumnDatas;
+    private static List<DataSet> emptyData;
+    private static List<DataSet> nullData;
+    private static List<DataSet> dataClear;
     private static final int SIZE_FOR_DATAS = 2;
     private static final int SIZE_FOR_EMPTY_DATAS = 1;
     private static final int SIZE_FOR_DATAS_WITH_NULL_COLUMNS = 3;
 
     @BeforeClass
     public static void setup () {
-        datas = new LinkedHashSet<>();
+        datas = new LinkedList<>();
         DataSet row1 = new DataSet();
         row1.put("id", "1");
         row1.put("column", "somelongvue");
@@ -35,35 +37,35 @@ public class TableViewUtilTest {
         datas.add(row1);
         datas.add(row2);;
 
-        dataClear = new LinkedHashSet<>();
+        dataClear = new LinkedList<>();
         DataSet rowc = new DataSet();
         rowc.put("id", null);
         rowc.put("column", null);
         rowc.put("ups", null);
         dataClear.add(rowc);
 
-        emptyData = new LinkedHashSet<>();
+        emptyData = new LinkedList<>();
         DataSet emptyRow = new DataSet();
         emptyRow.put("id", "");
         emptyRow.put("column", "");
         emptyRow.put("ups", "");
         emptyData.add(emptyRow);
 
-        nullData = new LinkedHashSet<>();
+        nullData = new LinkedList<>();
         DataSet nullValueRow = new DataSet();
         nullValueRow.put("id", "1");
         nullValueRow.put("column", null);
         nullValueRow.put("ups", "some");
         nullData.add(nullValueRow);
 
-        nullColumnData = new LinkedHashSet<>();
+        nullColumnData = new LinkedList<>();
         DataSet nullColumnRow = new DataSet();
         nullColumnRow.put("id", "1");
         nullColumnRow.put("column", "columnwithsomevalue");
         nullColumnRow.put(null, "some");
         nullColumnData.add(nullColumnRow);
 
-        nullColumnDatas = new LinkedHashSet<>();
+        nullColumnDatas = new LinkedList<>();
         DataSet nullColumnsRow1 = new DataSet();
         DataSet nullColumnsRow2 = new DataSet();
         DataSet nullColumnsRow3 = new DataSet();

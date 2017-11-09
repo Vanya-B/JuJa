@@ -1,6 +1,7 @@
 package com.babychev.sqlcmd.model;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 public interface DatabaseManager {
@@ -13,9 +14,9 @@ public interface DatabaseManager {
 
     Set<String> getListTables();
 
-    Set<DataSet> getTableData(String tableName);
+    List<DataSet> getTableData(String tableName);
 
-    Set<DataSet> getTableDataLimit(String tableName, int limit, int offSet);
+    List<DataSet> getTableDataLimit(String tableName, int limit, int offSet);
 
     int update(String tableName, int id, DataSet data);
 
@@ -26,8 +27,6 @@ public interface DatabaseManager {
     void insert(String tableName, DataSet data);
 
     void clear(String tableName);
-
-    String [] getColumns(String tableName);
 
     boolean isConnected();
 

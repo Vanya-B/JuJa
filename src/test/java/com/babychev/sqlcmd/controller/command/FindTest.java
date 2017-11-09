@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -52,7 +54,7 @@ public class FindTest {
         user2.put("id", "2");
         user2.put("login", "Sara");
         user2.put("password", "****");
-        Set<DataSet> data = new LinkedHashSet<>();
+        List<DataSet> data = new LinkedList<>();
         data.add(user1);
         data.add(user2);
 
@@ -80,7 +82,7 @@ public class FindTest {
         user1.put("id", null);
         user1.put("login", null);
         user1.put("password", null);
-        Set<DataSet> data = new LinkedHashSet<>();
+        List<DataSet> data = new LinkedList<>();
         data.add(user1);
 
         when(manager.getTableData("users")).thenReturn(data);

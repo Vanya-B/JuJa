@@ -3,13 +3,14 @@ package com.babychev.sqlcmd.view;
 import com.babychev.sqlcmd.model.DataSet;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 
 public class TableViewUtil {
 
-    public static String getViewTable(Set<DataSet> data) {
+    public static String getViewTable(List<DataSet> data) {
         Map <String, Integer> width = getWidth(data);
         String result = getHeader(width) + "\n";
         for (DataSet dataSet : data) {
@@ -23,7 +24,7 @@ public class TableViewUtil {
         return result;
     }
 
-    private static Map <String, Integer> getWidth(Set<DataSet> datas) {
+    private static Map <String, Integer> getWidth(List<DataSet> datas) {
         Map <String, Integer> width = new LinkedHashMap<>();
         int tmp = 0;
         for (DataSet data: datas) {
