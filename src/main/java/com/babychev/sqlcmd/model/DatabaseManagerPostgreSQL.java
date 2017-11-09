@@ -219,16 +219,13 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
     }
 
     @Override
-    public String [] schemas() {
-        String [] result = null;
+    public Set<String> schemas() {
+        Set<String> result = new LinkedHashSet<>();
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery("select schema_name from information_schema.schemata"))
         {
-            int size = getSize("information_schema", "schemata");
-            result = new String[size];
-            int index = 0;
             while (rs.next()) {
-                result[index++] = rs.getString(COLUMNINDEX);
+                result.add(rs.getString(COLUMNINDEX));
             }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
@@ -238,8 +235,8 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
 
     @Override
     public String selectSchema(String schemaName) {
-        String [] schemas = schemas();
-        if (schemas != null && schemas.length != 0) {
+        Set<String> schemas = schemas();
+        if (schemas != null && schemas.size() != 0) {
             for (String schema : schemas) {
                 if (schema.equals(schemaName)) {
                     this.schema = schema;

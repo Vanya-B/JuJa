@@ -34,7 +34,7 @@ public interface DatabaseManager {
 
     void dropSchema(String schemaName);
 
-    String [] schemas();
+    Set<String> schemas();
 
     String selectSchema(String schemaName);
 

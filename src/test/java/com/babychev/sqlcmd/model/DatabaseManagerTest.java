@@ -197,13 +197,13 @@ public class DatabaseManagerTest {
     @Test
     public void testCreateSchema () {
         //given
-        String [] schemasBeforeCreate = manager.schemas();
+        Set<String> schemasBeforeCreate = manager.schemas();
 
         //when
         manager.createSchema("testSchemaCreated");
 
         //then
-        String [] schemasAfterCreate = manager.schemas();
+        Set<String> schemasAfterCreate = manager.schemas();
         assertNotEquals(schemasBeforeCreate, schemasAfterCreate);
         manager.dropSchema("testSchemaCreated");
     }
@@ -214,7 +214,7 @@ public class DatabaseManagerTest {
         String expectedSchemas = "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]";
 
         //when
-        String actualSchemas = Arrays.toString(manager.schemas());
+        String actualSchemas = manager.schemas().toString();
 
         //then
         assertEquals(expectedSchemas, actualSchemas);
@@ -224,13 +224,13 @@ public class DatabaseManagerTest {
     public void testDropSchema () {
         //given
         manager.createSchema("createdSchema");
-        String expected = Arrays.toString(manager.schemas());
+        String expected = manager.schemas().toString();
 
         //when
         manager.dropSchema("createdSchema");
 
         //then
-        String actual = Arrays.toString(manager.schemas());
+        String actual = manager.schemas().toString();
         assertNotEquals(expected, actual);
     }
 

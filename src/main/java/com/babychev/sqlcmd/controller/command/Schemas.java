@@ -21,6 +21,6 @@ public class Schemas implements Command {
 
     @Override
     public void execute() {
-        console.print(Arrays.toString(manager.schemas()) + "\n");
+        console.print(manager.schemas().toString() + "\n");
     }
 }
