@@ -247,16 +247,13 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
     }
 
     @Override
-    public String [] databases() {
-        String [] result = null;
+    public Set<String> databases() {
+        Set<String> result = new LinkedHashSet<>();
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery("SELECT datname FROM pg_database"))
         {
-            int size = getSize("", "pg_database");
-            result = new String[size];
-            int index = 0;
             while (rs.next()) {
-                result[index++] = rs.getString(COLUMNINDEX);
+                result.add(rs.getString(COLUMNINDEX));
             }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
@@ -285,8 +282,8 @@ public class DatabaseManagerPostgreSQL implements DatabaseManager {
     @Override
     public String selectDatabase(String databaseName) {
         try {
-            String [] databases = databases();
-            if (databases != null && databases.length != 0) {
+            Set<String> databases = databases();
+            if (databases != null && databases.size() != 0) {
                 for (String database : databases) {
                     if (database.equals(databaseName)) {
                         connection.close();

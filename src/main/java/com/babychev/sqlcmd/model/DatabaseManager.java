@@ -38,7 +38,7 @@ public interface DatabaseManager {
 
     String selectSchema(String schemaName);
 
-    String [] databases();
+    Set<String> databases();
 
     void createDatabase(String databaseName);
 

@@ -250,13 +250,13 @@ public class DatabaseManagerTest {
     @Test
     public void testCreateDatabase () {
         //given
-        String unexpected = Arrays.toString(manager.databases());
+        String unexpected = manager.databases().toString();
 
         //when
         manager.createDatabase("testdb");
 
         //then
-        String actual = Arrays.toString(manager.databases());
+        String actual = manager.databases().toString();
         assertNotEquals(unexpected, actual);
         manager.dropDatabase("testdb");
     }
@@ -264,14 +264,14 @@ public class DatabaseManagerTest {
     @Test
     public void testDropDatabase () {
         //given
-        String expected = Arrays.toString(manager.databases());
+        String expected = manager.databases().toString();
         manager.createDatabase("testdb");
 
         //when
         manager.dropDatabase("testdb");
 
         //then
-        String actual = Arrays.toString(manager.databases());
+        String actual = manager.databases().toString();
         assertEquals(expected, actual);
     }
 

@@ -20,6 +20,6 @@ public class DataBases implements Command {
 
     @Override
     public void execute() {
-        console.print(Arrays.toString(manager.databases()) + "\n");
+        console.print(manager.databases().toString() + "\n");
     }
 }
