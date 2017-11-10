@@ -1,30 +1,25 @@
 package com.babychev.sqlcmd.model;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class DataSet {
 
-    private Data [] datas;
-    private int index;
+    private Map<String, Object> datas;
 
     public DataSet(){
-        datas = new Data[100]; //TODO set correct number
+        datas = new LinkedHashMap<>();
     }
 
     public void put (String column, Object value) {
-        datas[index++] = new Data(column, value);
-    }
-
-    public Object getValue(int index){
-        return datas[index].value();
-    }
-
-    public String getColumn(int index){
-        return datas[index].getColumn();
+        datas.put(column, value);
     }
 
     public String[] getValues(){
-        String [] result = new String[index];
-        for (int i = 0; i < index; i++) {
-            result[i] = (String)this.getValue(i);
+        String [] result = new String[datas.size()];
+        int index = 0;
+        for (Map.Entry<String, Object> entry : datas.entrySet()) {
+            result[index++] = (String) entry.getValue();
         }
         return result;
     }
@@ -39,9 +34,10 @@ public class DataSet {
     }
 
     public String[] getColumns(){
-        String [] result = new String[index];
-        for (int i = 0; i < index; i++) {
-            result[i] = (String)this.getColumn(i);
+        String [] result = new String[datas.size()];
+        int index = 0;
+        for (Map.Entry<String, Object> entry : datas.entrySet()) {
+            result[index++] = entry.getKey();
         }
         return result;
     }
@@ -49,32 +45,9 @@ public class DataSet {
     @Override
     public String toString () {
         String result = "";
-        for (int i = 0; i < index; i++) {
-            result += datas[i].toString() + '\n';
+        for (Map.Entry<String, Object> entry : datas.entrySet()) {
+            result += "column : " + entry.getKey() + "\n" + "value : " + entry.getValue() + "\n";
         }
         return result;
-    }
-
-    private class Data{
-        private String column;
-        private Object value;
-
-        public Data(String column, Object value){
-            this.column = column;
-            this.value = value;
-        }
-
-        public String getColumn(){
-            return  column;
-        }
-
-        public Object value(){
-            return value;
-        }
-
-        @Override
-        public String toString(){
-            return "column : " + column + '\n' + "value : " + value;
-        }
     }
 }

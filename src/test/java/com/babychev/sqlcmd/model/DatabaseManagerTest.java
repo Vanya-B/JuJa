@@ -111,7 +111,6 @@ public class DatabaseManagerTest {
 
     @Test
     public void testGetTableData(){
-        //TODO println correct output
         String expected = "[column : id\n" +
                 "value : 1\n" +
                 "column : login\n" +

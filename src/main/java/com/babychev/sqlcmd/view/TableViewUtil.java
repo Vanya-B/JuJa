@@ -75,7 +75,7 @@ public class TableViewUtil {
         String row = "";
         int index = 0;
         for (Map.Entry<String, Integer> entry : width.entrySet()) {
-            if (width.get(data.getColumn(index)) != null) {
+            if (width.get(data.getColumns()[index]) != null) {
                 row += String.format("|%" + entry.getValue() + "s" , data.getValues()[index++]);
             } else {
                 row += String.format("|%" + entry.getValue() + "s" , "");
