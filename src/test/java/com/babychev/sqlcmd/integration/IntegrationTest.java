@@ -80,6 +80,7 @@ public class IntegrationTest {
                 "\t* clear|tableName \n" +
                 "\t* drop|tableName \n" +
                 "\t* create|tableName|column1|column2|...|columnN \n" +
+                "\t\t* example : create|users|id INT PRIMARY KEY|name VARCHAR(10)|... \n" +
                 "\t* find|tableName \n" +
                 "\t\t* find|tableName|LIMIT|OFFSET \n" +
                 "\t* insert|tableName|column1|value1|column2|value2|...|columnN|valueN \n" +
