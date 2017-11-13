@@ -7,6 +7,7 @@ SQLcmd консольная программа для работы с базон
  - создайте базу данных и пользователя этой базы;
  - в файле "SQLcmd/src/main/resources/connection.properties" укажите свои host, port, schema.
  - для тестов в файле "SQLcmd/src/test/resources/connection.properties" укажите host, port, userName, password, dataBaseName, schemaName.
+ - для тестов в файле "/SQLcmd/src/test/resources/invalidConnection.properties" укажите host, port, invalidUserName, invalidPassword.
 
 6u [Подключение к базе] Я как ЮЗЕР хочу подключиться к существующей базе данных и вносить в нее правки
    * 6u.1 [Успешно подключились] я вижу приветствие от программы -> я ввожу имя базы, юзер, пароль -> я вижу сообщение что все ок (подключение успешно) -> PROFIT;
