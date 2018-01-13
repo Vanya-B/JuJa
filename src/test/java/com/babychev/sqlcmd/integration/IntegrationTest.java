@@ -3,11 +3,15 @@ package com.babychev.sqlcmd.integration;
 import com.babychev.sqlcmd.Main;
 import com.babychev.sqlcmd.controller.connection.DataSource;
 import com.babychev.sqlcmd.controller.connection.PostgresqlDataSource;
+import com.babychev.sqlcmd.model.DatabaseManager;
+import com.babychev.sqlcmd.model.DatabaseManagerPostgreSQL;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.PrintStream;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 
 public class IntegrationTest {
@@ -21,16 +25,28 @@ public class IntegrationTest {
     private static String password;
     private static String schemaName;
     private static String dataBaseNameForTest;
+    private static String databases;
+    private static String tables;
+    private static String schemas;
+    private static String databasesAfterCreate;
 
     @BeforeClass
     public static void setupProperties() {
         DataSource dataSource = new PostgresqlDataSource(PATH_TO_PROPERTIES);
+        DatabaseManager manager = new DatabaseManagerPostgreSQL(dataSource);
+        manager.connect();
+        Set<String> dbs = manager.databases();
         dataBaseName = dataSource.getProperties().getProperty("dataBaseName");
         userName = dataSource.getProperties().getProperty("userName");
         password = dataSource.getProperties().getProperty("password");
         schemaName = dataSource.getProperties().getProperty("schemaName");
         dataBaseNameForTest = dataSource.getProperties().getProperty("dataBaseNameForTest");
         tableName = dataSource.getProperties().getProperty("tableName");
+        databases = dbs.toString();
+        dbs.add(dataBaseNameForTest);
+        databasesAfterCreate = dbs.toString();
+        tables = manager.getListTables().toString();
+        schemas = manager.schemas().toString();
     }
 
     @Before
@@ -236,10 +252,10 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "[template1, template0, postgres]\n" +
-                "congratulation, database testdb is created \n" +
-                "[template1, template0, postgres, testdb]\n" +
-                "congratulation, database testdb is deleted \n" +
+                databases + "\n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                databasesAfterCreate + "\n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 

@@ -6,10 +6,6 @@ public class Console implements View {
 
     Scanner scanner;
 
-    public void println(String msg) {
-        System.out.println(msg);
-    }
-
     @Override
     public void print(String msg) {
         System.out.print(msg);
