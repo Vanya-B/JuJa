@@ -37,6 +37,7 @@ public class IntegrationTest {
         manager.connect();
         Set<String> dbs = manager.databases();
         Set<String> scms = manager.schemas();
+        Set<String> tbls = manager.getListTables();
         dataBaseName = dataSource.getProperties().getProperty("dataBaseName");
         userName = dataSource.getProperties().getProperty("userName");
         password = dataSource.getProperties().getProperty("password");
@@ -46,8 +47,9 @@ public class IntegrationTest {
         databases = dbs.toString();
         dbs.add(dataBaseNameForTest);
         scms.add(schemaName);
+        tbls.add(tableName);
         databasesAfterCreate = dbs.toString();
-        tables = manager.getListTables().toString();
+        tables = tbls.toString();
         schemas = scms.toString();
     }
 
@@ -820,12 +822,12 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
-                "table created : testtable\n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
+                "table created : " + tableName + "\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
@@ -845,9 +847,9 @@ public class IntegrationTest {
                 "| 3|updatevalue|updatepassword|\n" +
                 "+--+-----------+--------------+\n" +
                 "\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -879,21 +881,21 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
-                "table created : testtable\n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
+                "table created : " + tableName + "\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "wrong number of parameters, you entered : 3, have to not less five!\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -925,12 +927,12 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
-                "table created : testtable\n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
+                "table created : " + tableName + "\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
@@ -939,9 +941,9 @@ public class IntegrationTest {
                 "ERROR: column \"column1\" of relation \"testtable\" does not exist\n" +
                 "  Position: 33\n" +
                 "wrong parameter tableName|id|column|...\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -973,12 +975,12 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
-                "table created : testtable\n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
+                "table created : " + tableName + "\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
@@ -989,9 +991,9 @@ public class IntegrationTest {
                 "|id|login|password|\n" +
                 "+--+-----+--------+\n" +
                 "\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -1023,21 +1025,21 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
-                "table created : testtable\n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
+                "table created : " + tableName + "\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "inserted successfully\n" +
                 "wrong number of parameters, have to 2, but entered : 4\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -1063,15 +1065,15 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
                 "org.postgresql.util.PSQLException: ERROR: relation \"testschema.wrongtable\" does not exist\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -1098,16 +1100,16 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
-                "table created : testtable\n" +
-                "[testtable]\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
+                "table created : " + tableName + "\n" +
+                tables + "\n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -1134,16 +1136,16 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
-                "table created : testtable\n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
+                "table created : " + tableName + "\n" +
                 "dropped success! list of tables : []\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -1169,15 +1171,15 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
                 "wrong number of parameters, have to 2, but entered : 3\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
