@@ -400,14 +400,14 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "'testschema' schema is selected \n" +
-                "congratulation, schema testschema is deleted \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "'" + schemaName + "' schema is selected \n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -429,11 +429,11 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "cannot find schema 'testschema' \n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "cannot find schema '" + schemaName + "' \n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
