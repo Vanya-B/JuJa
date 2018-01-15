@@ -29,11 +29,12 @@ public class IntegrationTest {
     private static String tables;
     private static String schemas;
     private static String databasesAfterCreate;
+    private static DatabaseManager manager;
 
     @BeforeClass
     public static void setupProperties() {
         DataSource dataSource = new PostgresqlDataSource(PATH_TO_PROPERTIES);
-        DatabaseManager manager = new DatabaseManagerPostgreSQL(dataSource);
+        manager = new DatabaseManagerPostgreSQL(dataSource);
         manager.connect();
         Set<String> dbs = manager.databases();
         Set<String> scms = manager.schemas();
@@ -1204,14 +1205,14 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
-                "congratulation, schema testschema is deleted \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema]\n" +
-                "'postgres' database is selected \n" +
-                "congratulation, database testdb is deleted \n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                "'" + dataBaseNameForTest + "' database is selected \n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
+                "congratulation, schema " + schemaName + " is deleted \n" +
+                manager.schemas().toString() + "\n" +
+                "'" + dataBaseName + "' database is selected \n" +
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
@@ -1250,10 +1251,10 @@ public class IntegrationTest {
         assertEquals("================== Welcome to SQLcmd ==================\n" +
                 "Enter connect|dataBaseName|userName|password to connect to DB or enter help\n" +
                 "congratulation, connected was success\n" +
-                "congratulation, database testdb is created \n" +
-                "[template1, template0, postgres, testdb]\n" +
-                "congratulation, database testdb is deleted \n" +
-                "[template1, template0, postgres]\n" +
+                "congratulation, database " + dataBaseNameForTest + " is created \n" +
+                databasesAfterCreate + "\n"+
+                "congratulation, database " + dataBaseNameForTest + " is deleted \n" +
+                manager.databases().toString() + "\n" +
                 "============= Good Bay =============\n", out.getData());
     }
 
