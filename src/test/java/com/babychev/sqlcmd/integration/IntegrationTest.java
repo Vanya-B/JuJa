@@ -36,6 +36,7 @@ public class IntegrationTest {
         DatabaseManager manager = new DatabaseManagerPostgreSQL(dataSource);
         manager.connect();
         Set<String> dbs = manager.databases();
+        Set<String> scms = manager.schemas();
         dataBaseName = dataSource.getProperties().getProperty("dataBaseName");
         userName = dataSource.getProperties().getProperty("userName");
         password = dataSource.getProperties().getProperty("password");
@@ -44,9 +45,10 @@ public class IntegrationTest {
         tableName = dataSource.getProperties().getProperty("tableName");
         databases = dbs.toString();
         dbs.add(dataBaseNameForTest);
+        scms.add(schemaName);
         databasesAfterCreate = dbs.toString();
         tables = manager.getListTables().toString();
-        schemas = manager.schemas().toString();
+        schemas = scms.toString();
     }
 
     @Before
@@ -343,8 +345,8 @@ public class IntegrationTest {
                 "congratulation, connected was success\n" +
                 "congratulation, database testdb is created \n" +
                 "'testdb' database is selected \n" +
-                "congratulation, schema testschema is created \n" +
-                "[pg_toast, pg_temp_1, pg_toast_temp_1, pg_catalog, public, information_schema, testschema]\n" +
+                "congratulation, schema " + schemaName + " is created \n" +
+                schemas + "\n" +
                 "congratulation, schema testschema is deleted \n" +
                 "'postgres' database is selected \n" +
                 "congratulation, database testdb is deleted \n" +
